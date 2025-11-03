@@ -1,46 +1,51 @@
 erDiagram
     CUSTOMER {
         int id PK
-        string name
-        string surname
-        string email
-        string phoneNumber
+        String name
+        String surname
+        String email UK
+        String phoneNumber
     }
 
     ACCOUNT {
         int id PK
-        string IBAN UK
-        decimal balance
-        string currency
-        string type
+        String IBAN UK
+        double balance
+        String currency
+        String type
+        int customer_id FK
     }
 
     CARD {
         int id PK
-        string cardNumber UK
-        date expirationDate
-        string type
+        String cardNumber UK
+        LocalDate expirationDate
+        String type
+        int accountId FK
     }
 
     TRANSACTION {
         int id PK
-        string type
-        decimal amount
-        string currency
-        date date
+        String type
+        double amount
+        String currency
+        LocalDate date
+        int fromAccountId FK
+        int toAccountId FK
     }
 
     LOAN {
         int id PK
-        decimal amount
-        decimal interestRate
-        date startDate
-        date endDate
-        string status
+        double amount
+        double interestRate
+        LocalDate startDate
+        LocalDate endDate
+        String status
+        int accountId FK
     }
 
     CUSTOMER ||--o{ ACCOUNT : has
     ACCOUNT ||--o{ CARD : has
     ACCOUNT ||--o{ TRANSACTION : fromAccount
     ACCOUNT ||--o{ TRANSACTION : toAccount
-    ACCOUNT ||--o{ LOAN : owns
+    ACCOUNT ||--o{ LOAN : has
