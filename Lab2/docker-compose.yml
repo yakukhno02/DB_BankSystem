@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: bank
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - db-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@kpi.edu
+      PGADMIN_DEFAULT_PASSWORD: password123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+      PGADMIN_CONFIG_SESSION_EXPIRATION_TIME: 604800
+    ports:
+      - "1480:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - db-network
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  db-network:
+    driver: bridge
