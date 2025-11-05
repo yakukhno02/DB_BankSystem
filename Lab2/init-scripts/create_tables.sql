@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     type VARCHAR(32) NOT NULL,
     currency VARCHAR(3) NOT NULL,
     amount DECIMAL(12, 2) NOT NULL CHECK (amount > 0),
-    date DATE,
+    date DATE NOT NULL DEFAULT CURRENT_DATE,
     from_account_id INT REFERENCES account (id),
     to_account_id INT REFERENCES account (id)
     );
