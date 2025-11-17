@@ -4,9 +4,10 @@ VALUES ('Марія', 'Шевченко', 'shevch@lll.kpi.ua', '380682715004'),
        ('Богдан', 'Федоренко', 'fedorenko2@lll.kpi.ua', '380542715066'),
        ('Іван', 'Ілющенко', 'ivanIl@lll.kpi.ua', '480642715067');
 
-INSERT INTO account(iban, currency, type, customer_id)
+INSERT INTO account(iban, currency, type, type, customer_id)
 VALUES ('UA453052820000026004012345632', 'UAH', 'deposit', 1),
        ('UA453052820000026004012345443', 'UAH', 'saving', 3);
+
 INSERT INTO account(iban, currency, balance, type, customer_id)
 VALUES ('UA453042820000026004012345633', 'UAH', 2500, 'saving', 1),
        ('UA453542820000026004012345633', 'UAH', 2000, 'credit', 1);
