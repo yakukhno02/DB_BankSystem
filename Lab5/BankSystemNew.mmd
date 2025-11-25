@@ -1,0 +1,57 @@
+erDiagram
+    CUSTOMER {
+        int customer_id PK
+        string name
+        string surname
+        string email UK
+        string phone_number
+    }
+
+    ACCOUNT {
+        int account_id PK
+        string iban UK
+        decimal balance
+        string currency
+        string type
+        int customer_id FK
+    }
+
+    CARD_TYPE {
+        int type_id PK
+        string type_name UK
+    }
+
+    CARD {
+        int card_id PK
+        string card_number UK
+        date expiration_date
+        int type_id FK
+        int account_id FK
+    }
+
+    TRANSACTIONS {
+        int transaction_id PK
+        string type
+        string currency
+        decimal amount
+        date date
+        int from_account_id FK
+        int to_account_id FK
+    }
+
+    LOAN {
+        int loan_id PK
+        decimal amount
+        decimal interest_rate
+        date start_date
+        date end_date
+        string status
+        int account_id FK
+    }
+
+    CUSTOMER ||--o{ ACCOUNT : "owns"
+    ACCOUNT ||--o{ CARD : "has"
+    CARD_TYPE ||--o{ CARD : ""
+    ACCOUNT ||--o{ TRANSACTIONS : "from_account"
+    ACCOUNT ||--o{ TRANSACTIONS : "to_account"
+    ACCOUNT ||--o{ LOAN : "has"
